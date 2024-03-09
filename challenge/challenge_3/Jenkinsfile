@@ -1,0 +1,34 @@
+pipeline {
+  agent any
+  parameters {
+    string(
+      defaultValue:"Default string", 
+      description: "Profile of the deployment", 
+      name: "deploymentName"
+    )
+    booleanParam(
+      defaultValue:false, 
+      description: "The deployment is confirmed", 
+      name: "isConfirmed"
+    )
+    choice(
+      choices: [
+        "EU-WEST-2A",
+        "EU-WEST-2B", 
+        "EU-WEST-2C"
+      ], 
+      description: "AZ", 
+      name:"AZ"
+    )
+  }
+
+  stages {
+    stage("[+] build stage") {
+      steps {
+        echo "Deployment name: ${params.deploymentName}"
+        echo "Confirm: ${params.isConfirmed}"
+        echo "AZ: ${params.AZ}"
+      }
+    }
+  }
+}

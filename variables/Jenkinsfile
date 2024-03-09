@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+
+  environment {
+    def strExample = "Example string"
+    def idExample = 10542865
+    def isConfirmed = false
+  }
+
+  stages {
+    stage('[+] first stage') {
+      steps {
+        echo "${strExample}"
+        echo "${idExample}"
+        echo "${isConfirmed}"
+      }
+    }
+  }
+}

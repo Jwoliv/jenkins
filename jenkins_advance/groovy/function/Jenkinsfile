@@ -1,0 +1,40 @@
+pipeline {
+  agent any
+
+  parameters {
+    booleanParam(
+      defaultValue: true, 
+      description: "Allow to print text", 
+      name: "isAllowed"
+    )
+  }
+
+  environment {
+    def exampleText = "env text"
+  }
+
+  stages {
+    stage("step_1") {
+      steps {
+        script {
+          if (params.isAllowed) {
+            exampleFunction(exampleText, 0)
+            exampleFunction("example text 1000001", 1)
+            exampleFunction("example text 1000002", 2)
+            exampleFunction("example text 1000003", 3)
+            exampleFunction("example text 1000004", 4)
+          } else {
+            echo "You don't have permittions: isAllowed = ${params.isAllowed}"
+          }
+        }
+      }
+    }
+  }
+
+}
+
+def exampleFunction(String text, int number) {
+  echo "============"
+  echo "№${number}. ${text}"
+  echo "============"
+}

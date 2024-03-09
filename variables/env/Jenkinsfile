@@ -1,0 +1,12 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('[+] first stage') {
+      steps {
+        echo "${MAVEN_HOME}"
+        echo "${JAVA_HOME}"
+      }
+    }
+  }
+}

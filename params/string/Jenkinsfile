@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+  
+  parameters {
+    string(
+      defaultValue: "test text example", 
+      description: "Some parameter with string type", 
+      name: "strExample"
+    )
+  }
+  
+  stages {
+    stage('[+] show parameter') {
+      steps {
+        echo "String param: ${params.strExample}"
+      }
+    }
+  }
+}

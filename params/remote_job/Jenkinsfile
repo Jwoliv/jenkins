@@ -1,0 +1,35 @@
+pipeline {
+  agent any
+  stages {
+    stage("clean up") {
+      steps {
+        deleteDir()
+      }
+    }
+    stage("build") {
+      steps {
+        sh "git clone https://github.com/Jwoliv/GeekShop.git"
+        dir("GeekShop") {
+          sh "mvn clean package"
+        }
+      }
+    }
+    stage("test") {
+      steps {
+        dir("GeekShop") {
+          sh "mvn test"
+        }
+      }
+    }
+    stage("finish") {
+      steps {
+        echo "====================="
+        echo "job completed success"
+        echo "====================="
+        build job: 'First Pipeline', parameters: [
+          [$class: 'BooleanParameterValue', name: 'nameOfParameter', value: true]
+        ]
+      }
+    }
+  }
+}

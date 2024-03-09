@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+
+  parameters {
+    booleanParam(
+      defaultValue: true, 
+      description: "Permittion to print text", 
+      name: "isPrintText"
+    )
+    string(
+      defaultValue: "test text example", 
+      description: "Example of the text", 
+      name: "text"
+    )
+  }
+
+  stages {
+    stage("[+] stage_1") {
+      steps {
+        script {
+          if (params.isPrintText) {
+            System.out.print("answer: ${params.text}");
+            currentBuild.result = "SUCCESS"
+            return
+          } else {
+            System.out.print("you don't have permition to this act");
+          } 
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+pipeline {
+  agent any
+  
+  parameters {
+    choice(
+      choices: [
+        "dev",
+        "test",
+        "prod",
+        "reliz"
+      ],
+      description: "lauch type", 
+      name: "launchType"
+    )
+  }
+  
+  stages {
+    stage('[+] start build') {
+      steps {
+        echo "start lauch with profile: ${params.launchType}"
+      }
+    }
+  }
+}

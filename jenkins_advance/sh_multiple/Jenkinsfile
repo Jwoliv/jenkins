@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+
+  stages {
+    stage("first") {
+      steps {
+        sh "git clone https://github.com/Jwoliv/GeekShop"
+        dir ("GeekShop") {
+          sh """
+            mvn clean install
+            mvn test 
+          """
+        }
+      }
+    }
+  }
+}

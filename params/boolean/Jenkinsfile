@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+  
+  parameters {
+    booleanParam(
+      defaultValue: true, 
+      description: "Some parameter with boolean type", 
+      name: "isExample"
+    )
+  }
+  
+  stages {
+    stage('[+] show parameter') {
+      steps {
+        echo "Boolean param: ${params.isExample}"
+      }
+    }
+  }
+}
